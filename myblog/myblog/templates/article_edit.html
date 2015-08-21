@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>edit article</title>
+</head>
+<body>
+	{% if art %} 
+		<form method="post">
+			<label>title</label>
+			<input type="text" placeholder={{art.title}}>
+			<input type="text" placeholder={{art.content}}>
+			<input type="submit" value="edit">
+		</form>
+	{% endif %}
+</body>
+</html>

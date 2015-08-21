@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>article</title>
+</head>
+<body>
+	<header>
+		{% if articles %}
+			<h1>blogname : {{articles.0.blogname.name}}</h1>
+			<h1>words : {{articles.0.blogname.words}}</h1>
+		{% endif %}
+	</header>
+	<div class="user">
+		{% if u %}
+			<h3>welcome: {{u.nickname}}</h3>
+			<a href="/personal/">myblog</a>
+			<a href="/account/logout/">logout</a>
+		{% endif %}
+	</div>
+	<div class="article">
+		{% if articles %}
+			{% for art in articles %}
+				<h2>title: {{art.title}}</h2>
+				<div>
+					<span>writer : {{art.writer.nickname}}</span>
+					<span>createtime : {{art.createtime}}</span>
+					<span>modifiedtime: {{art.modiftime}}</span>
+				</div>
+				<p>{{art.content}}</p>
+
+				{% if canedit == True %}
+					<a href="/personal/article/edit/{{art.id}}/">edit</a>
+					<a href="/personal/article/del/{{art.id}}/">delete</a>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	</div>
+
+</body>
+</html>
