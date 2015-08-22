@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>元素拖拽</title>
+        <style type="text/css">
+            #drag {
+                position: absolute;
+                top: 1px;
+                left: 1px;
+                width: 100px;
+                height: 400px;
+                background-color: #ccc;
+                cursor: move;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="drag">
+            
+        </div>
+    </body>
+    <script type="text/javascript" src="static/lib/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+        var isDraged = false,
+            offsetX = 0,
+            offsetY = 0;
+        function addEvent(node, event, callback) {
+            if(document.addEventListener) {
+                node.addEventListener(event, callback);
+            } else {
+                node.attachEvent("on" + event, callback);
+            }
+        }
+        var dragNode = document.getElementById("drag");
+        addEvent(dragNode, "mousedown", function(event) {
+            isDraged = true;
+            var left = dragNode.style.left ? dragNode.style.left : 0;
+            var top = dragNode.style.top ? dragNode.style.top : 0;
+            offsetX = event.pageX - parseInt(left);
+            offsetY = event.pageY - parseInt(top);
+        })
+        addEvent(document, "mousemove", function(event) {
+            if(isDraged) {
+                dragNode.style.left = event.pageX - offsetX + "px";
+                dragNode.style.top = event.pageY - offsetY + "px";
+            }
+        })
+        addEvent(document, "mouseup", function() {
+            isDraged = false;
+        })
+
+
+    </script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		input[value=pre]:checked ~ span {
+			width: 100px;
+			height: 100px;
+			background-color: yellow;
+		}
+		span {
+		  width: 100px;
+		  height: 100px;
+		  background-color: green;
+		  display: inline-block;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="env-switch-area">
+	    <input type="radio" name="env" value="daily"/>
+	    <label>日常</label>
+	    <input type="radio" name="env" value="pre"/>
+	    <label>预发</label>
+	    <input type="radio" name="env" value="online"/>
+	    <label>线上</label>
+	    <span><!-- 绿色滑块 --></span>
+	</div>
+</body>
+</html>

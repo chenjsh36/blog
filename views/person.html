@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Person</title>
+	<!-- <link rel="stylesheet" type="text/css" href=""> -->
+	<style type="text/css">
+		.pic-container {
+			width: 250px;
+			height: 350px;
+			overflow: hidden;
+		}
+		#loadingImg {
+			width: 100%;
+			display: block;
+			margin: auto;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="pic-container">
+		<img id="loadingImg" src="static/images/person.jpg">
+	</div>
+	<input id="uploadImg" type="file" accept="image/*">
+</body>
+<script type="text/javascript" src="static/lib/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+	function getFileUrl(file) {
+		var url = null;
+		if (window.createObjURL != undefined) {
+			url = window.createObjectURL(file);
+			console.log("base");
+		}
+		else if (window.URL != undefined) {
+			url = window.URL.createObjectURL(file);
+			console.log("FF chrome or ie+");
+		}
+		else if (window.webkitURL != undefined) {
+			url = window.webkitURL.createObjectURL(file);
+			console.log("chrome");
+		}
+		return url;
+	}
+
+	$("body").on("change", "#uploadImg", function() {
+		var url = getFileUrl(this.files[0]);
+		if (url != null) {
+			$("#loadingImg").attr("src", url);
+		}
+	})
+
+</script>
+</html>

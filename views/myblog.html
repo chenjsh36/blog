@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ublog.name}}</title>
+	<link rel="stylesheet" type="text/css" href="static/css/myblog.css">
+</head>
+<body>
+	<header>
+		<a href="/"><b>chenjsh36</b></a>
+		<span>对自己负责</span>
+		<div class="float-right">
+			<a href="#">[登录]</a>
+			<span>/</span>
+			<a href="#">[注册]</a>
+		</div>
+	</header>
+	<nav>
+		<div>
+			<ul>
+				<li>
+					<a href="/">首页</a>
+				</li>
+				<!-- 				
+				{% for tag in tags %}
+				<li>
+					<a href="/tag/{{tag.name}}/">tag.name</a>
+				</li>
+				{% endfor %} 
+				-->
+				<li>
+					<a href="https://github.com/chenjsh36">PHP</a>
+				</li>
+				<li>
+					<a href="https://github.com/chenjsh36">Web</a>
+				</li>
+				<li>
+					<a href="https://github.com/chenjsh36">Linux</a>
+				</li>
+				<li>
+					<a href="https://github.com/chenjsh36">GitHub</a>
+				</li>
+				<li>
+					<a href="http://hellocjs.sinaapp.com/">SAE</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div id="content">
+		<div id="articles">
+			<!-- 			
+			{% for item in uarticle %}
+				<article>
+					<div class="time-tag"><span>{{item.createtime}}</span></div>
+					<div class="art-title">
+						<h3>{{item.title}}</h3>
+						<span>{{item.writer.nickname}}</span>
+					</div>
+					<div class="art-content">
+						<p class="article_content">{{item.content}}</p>						
+					</div>
+				</article>
+			{% endfor %} -->
+			<article>
+				<div class="art-title">
+					<div class="time-tag"><span>2015<br>01-01</span></div>
+					<div class="title-tag">
+						<h3>koala 编译scss不支持中文解决方案</h3>
+						<span><a href="#">chenjsh36</a></span>
+					</div>
+				</div>
+
+				<div class="art-content">
+					<p class="article_content">scss文件编译时候使用ruby环境，出现 Syntax error: Invalid GBK character "\xE5" 检查了好久才发现 scss编译不支持中文字体，请教了下度娘才找到解决方案 解决方法很简单 进入到Koala 安装目录 D:\Koala\rubygems\gems\sass-3.4.9\lib\sass 修改 engine.rb 文件 ....</p>						
+				</div>
+				<div class="art-footer">
+					<i class="icon-pencil"></i>
+					<a href="#">web</a>
+					<a href="#">html</a>
+					<a href="#">javacript</a>
+				</div>
+			</article>
+			<article>
+				<div class="art-title">
+					<div class="time-tag"><span>2015<br>01-01</span></div>
+					<div class="title-tag">
+						<h3>koala 编译scss不支持中文解决方案解决方案解决方案解决方案</h3>
+						<span><a href="#">chenjsh36</a></span>
+					</div>
+				</div>
+
+				<div class="art-content">
+					<p class="article_content">scss文件编译时候使用ruby环境，出现 Syntax error: Invalid GBK character "\xE5" 检查了好久才发现 scss编译不支持中文字体，请教了下度娘才找到解决方案 解决方法很简单 进入到Koala 安装目录 D:\Koala\rubygems\gems\sass-3.4.9\lib\sass 修改 engine.rb 文件 ....</p>						
+				</div>
+				<div class="art-footer">
+					<i class="icon-pencil"></i>
+					<a href="#">web</a>
+					<a href="#">html</a>
+					<a href="#">javacript</a>
+				</div>
+			</article>
+			<article>
+				<div class="art-title">
+					<div class="time-tag"><span>2015<br>01-01</span></div>
+					<div class="title-tag">
+						<h3>koala 编译scss不支持中文解决方案</h3>
+						<span><a href="#">chenjsh36</a></span>
+					</div>
+				</div>
+
+				<div class="art-content">
+					<p class="article_content">scss文件编译时候使用ruby环境，出现 Syntax error: Invalid GBK character "\xE5" 检查了好久才发现 scss编译不支持中文字体，请教了下度娘才找到解决方案 解决方法很简单 进入到Koala 安装目录 D:\Koala\rubygems\gems\sass-3.4.9\lib\sass 修改 engine.rb 文件 ....</p>						
+				</div>
+				<div class="art-footer">
+					<i class="icon-pencil"></i>
+					<a href="#">web</a>
+					<a href="#">html</a>
+					<a href="#">javacript</a>
+				</div>
+			</article>
+		</div>
+		<div id="sidebar">
+			<div id="person-message">
+				<div class="pic-container">
+					<img src="static/images/person.jpg">
+				</div>
+				<div class="message">
+					<label><strong>姓名：</strong>陈坚生</label>
+					<label><strong>生日：</strong>1993-02-22</label>
+					<label><strong>邮箱地址：</strong>chenjsh36@outlook.com</label>
+				</div>				
+			</div>
+			<div id="tag-message">
+				<label>标签</label>
+				<div class="tap-content">
+					<a href="#" class="back-red">web(13)</a>
+					<a href="#" class="back-blue">html(12)</a>
+					<a href="#" class="back-green">js(123)</a>
+					<a href="#" class="back-yellow">css(12)</a>
+					<a href="#" class="back-orange">less(3)</a>
+				</div>
+			</div>
+			<div id="website-message">
+				<label>站点信息</label>
+				<div class="tap-content">
+					<ul>
+						<li>
+							文章总数：10篇
+						</li>
+						<li>
+							标签总数：10个
+						</li>
+						<li>
+							页面总数：2页
+						</li>
+						<li>
+							网站已运行：10天
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div>
+			<dl>
+				<dt>前端网站</dt>
+				<dd><a href="#">w3cfun</a></dd>
+				<dd><a href="http://codepen.io/">开源代码</a></dd>
+				<dd><a href="http://www.ituring.com.cn/article/114385">图灵社区</a></dd>
+				<dd><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript">MDN</a></dd>
+				<dd><a href="https://github.com/ecomfe/spec">编码规范</a></dd>
+			</dl>
+			<dl>
+				<dt>工具类</dt>
+				<dd><a href="http://coffee-script.org/">coffeescript</a></dd>
+				<dd><a href="http://jade-lang.com/">jade</a></dd>
+				<dd><a href="http://datatables.net/">datatables</a></dd>
+			</dl>
+			<dl>
+				<dt>前端博客</dt>
+				<dd><a href="http://www.aliued.cn/">用户体验</a></dd>
+				<dd><a href="http://ued.sina.com/">sinaUED</a></dd>
+			</dl>
+		</div>
+	</footer>
+</body>
+</html>
