@@ -2,16 +2,117 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>edit article</title>
+	<title>Article Edit</title>
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/addArticle.css"/>
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/simditor.css" />
+
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery.min.js"></script>
+	
+	<script type="text/javascript" src="{{STATIC_URL}}js/module.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/hotkeys.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/uploader.min.js"></script>
+	
+	<script type="text/javascript" src="{{STATIC_URL}}js/simditor.min.js"></script>
+
+
 </head>
 <body>
-	{% if art %} 
-		<form method="post">
-			<label>title</label>
-			<input type="text" placeholder={{art.title}}>
-			<input type="text" placeholder={{art.content}}>
-			<input type="submit" value="edit">
-		</form>
-	{% endif %}
+	<div id="content">
+		<div id="settings">
+			{% if art %}
+			<form method="post" enctype="multipart/form-data">
+				<table>
+					<tr>
+						<td>title</td>
+						<td>
+							<input name="article_title" type="text" placeholder="{{art.title}}"><br/>
+						</td>
+					</tr>
+					<tr>
+						<td><label>content</label></td>
+						<td>
+							<textarea id="editor" placeholder="Balabala" autofocus></textarea>
+							<input type="text" class="hide" name="article_content" value="{{art.content}}">
+						</td>			
+					</tr>
+					<tr>
+						<td>
+							<label>tags</label>
+						</td>
+						<td>
+							<input name="tags" type="checkbox"><label>web</label>
+							<input name="tags" type="checkbox"><label>html</label>				
+							<input name="tags" type="checkbox"><label>javascript</label>
+						</td>
+					</tr>
+					<tr>						
+						<td><input type="submit" value="发布" class="hide"><br/></td>
+						<td><input type="button" value="check"></td>
+
+
+					</tr>
+				</table>
+			</form>
+			{% endif %}
+		</div>
+		<div id="sidebar">
+			<div class="inner">
+				<div id="nickname">
+					<strong>{{u.nickname}}</strong>
+				</div>
+				<div>
+					<ul>
+						<li>
+							<a href="/personal/">个人资料</a></li>
+						<li  class="active"><a href="#">文章</a></li>
+						<li><a href="/personal/articles/">文章列表</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+<script type="text/javascript">
+	var origin_content = $("input[name=article_content]").val();
+	console.log("input:" + origin_content);
+	var editor = new Simditor({
+		textarea: $('#editor'),
+		//optional options
+		placeholder: origin_content,
+		defaultImage: 'images/image.png',
+		params: {},
+		upload: false,
+		tabIndent: true,
+		toolbar: [
+		  'title',
+		  'bold',
+		  'italic',
+		  'underline',
+		  'strikethrough',
+		  'color',
+		  'ol',             
+		  'ul',           
+		  'blockquote',
+		  'code',          
+		  'table',
+		  'link',
+		  'image',
+		  'hr',            
+		  'indent',
+		  'outdent',
+		  'alignment',
+		],
+		toolbarFloat: true,
+		toolbarFloatOffset: 0,
+		toolbarHidden: false,
+		pasteImage: false
+		
+	});
+	$("input[type=button]").on("click", function(event) {
+		event.preventDefault();
+		console.log(editor.getValue());
+		$("input[name=article_content]").val(editor.getValue());
+		$("input[type=submit").click();
+	})
+</script>
 </html>

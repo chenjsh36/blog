@@ -2,40 +2,56 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>article</title>
+	<title>art Article</title>
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/articles.css">
+
+
 </head>
 <body>
-	<header>
-		{% if articles %}
-			<h1>blogname : {{articles.0.blogname.name}}</h1>
-			<h1>words : {{articles.0.blogname.words}}</h1>
-		{% endif %}
-	</header>
-	<div class="user">
-		{% if u %}
-			<h3>welcome: {{u.nickname}}</h3>
-			<a href="/personal/">myblog</a>
-			<a href="/account/logout/">logout</a>
-		{% endif %}
-	</div>
-	<div class="article">
-		{% if articles %}
-			{% for art in articles %}
-				<h2>title: {{art.title}}</h2>
+
+	<div id="content">
+		<div id="settings">
+
+				<table>
+					<thead>
+						<tr>
+							<td>标题</td>
+							<td>状态</td>
+							<td>操作</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					{% for article in articles %}
+					<tr>
+						<td>{{article.title}}</td>
+						<td>{{article.state}}</td>
+						<td><a href="/personal/article/edit/{{article.id}}/">编辑</a></td>
+						<td><a href="/personal/article/del/{{article.id}}/">删除</a></td>
+					</tr>
+					{% endfor %}
+				</table>
+
+		</div>
+		<div id="sidebar">
+			<div class="inner">
 				<div>
-					<span>writer : {{art.writer.nickname}}</span>
-					<span>createtime : {{art.createtime}}</span>
-					<span>modifiedtime: {{art.modiftime}}</span>
+					<ul>
+						<li>
+							<a href="/personal/">个人资料</a>
+						</li>
+						<li>
+							<a href="/personal/article/add/">文章</a>
+						</li>
+						<li class="active">
+							<a href="/personal/articles/">文章列表</a>
+						</li>
+					</ul>
 				</div>
-				<p>{{art.content}}</p>
-
-				{% if canedit == True %}
-					<a href="/personal/article/edit/{{art.id}}/">edit</a>
-					<a href="/personal/article/del/{{art.id}}/">delete</a>
-				{% endif %}
-			{% endfor %}
-		{% endif %}
+			</div>
+		</div>
 	</div>
-
 </body>
+<script type="text/javascript">
+
+</script>
 </html>

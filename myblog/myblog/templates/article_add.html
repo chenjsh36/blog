@@ -2,15 +2,110 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>add article</title>
+	<title>Add ArticleS</title>
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/addArticle.css"/>
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/simditor.css" />
+
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery.min.js"></script>
+	
+	<script type="text/javascript" src="{{STATIC_URL}}js/module.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/hotkeys.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/uploader.min.js"></script>
+	
+	<script type="text/javascript" src="{{STATIC_URL}}js/simditor.min.js"></script>
+
+
 </head>
 <body>
-	<form method="post">
-		<label>title: </label>
-		<input type="text" name="article_title">
-		<label>content: </label>
-		<input type="text" name="article_content">
-		<input type="submit">
-	</form>
+	<div id="content">
+		<div id="settings">
+			<form method="post" enctype="multipart/form-data">
+				<table>
+					<tr>
+						<td>title</td>
+						<td>
+							<input name="article_title" type="text"><br/>
+						</td>
+					</tr>
+					<tr>
+						<td><label>content</label></td>
+						<td>
+							<textarea id="editor" placeholder="Balabala" autofocus></textarea>
+							<input type="text" class="hide" name="article_content">
+						</td>			
+					</tr>
+					<tr>
+						<td>
+							<label>tags</label>
+						</td>
+						<td>
+							<input name="tags" type="checkbox"><label>web</label>
+							<input name="tags" type="checkbox"><label>html</label>				
+							<input name="tags" type="checkbox"><label>javascript</label>
+						</td>
+					</tr>
+					<tr>						
+						<td><input type="submit" value="发布" class="hide"><br/></td>
+						<td><input type="button" value="check"></td>
+
+
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div id="sidebar">
+			<div class="inner">
+				<div>
+					<ul>
+						<li>
+							<a href="/personal/">个人资料</a></li>
+						<li  class="active"><a href="/personal/article/add">文章</a></li>
+						<li><a href="/personal/articles/">文章列表</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+<script type="text/javascript">
+	var editor = new Simditor({
+		textarea: $('#editor'),
+		//optional options
+		placeholder: '',
+		defaultImage: 'images/image.png',
+		params: {},
+		upload: false,
+		tabIndent: true,
+		toolbar: [
+		  'title',
+		  'bold',
+		  'italic',
+		  'underline',
+		  'strikethrough',
+		  'color',
+		  'ol',             
+		  'ul',           
+		  'blockquote',
+		  'code',          
+		  'table',
+		  'link',
+		  'image',
+		  'hr',            
+		  'indent',
+		  'outdent',
+		  'alignment',
+		],
+		toolbarFloat: true,
+		toolbarFloatOffset: 0,
+		toolbarHidden: false,
+		pasteImage: false
+		
+	});
+	$("input[type=button]").on("click", function(event) {
+		event.preventDefault();
+		console.log(editor.getValue());
+		$("input[name=article_content]").val(editor.getValue());
+		$("input[type=submit").click();
+	})
+</script>
 </html>

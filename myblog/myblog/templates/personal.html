@@ -2,44 +2,80 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Personal</title>
+	<title>{{ublog.name}}</title>
+
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/personal.css">
 </head>
 <body>
-	<h1>个人页面</h1>
 
-	<div>
-		<h2>operation</h2>
-		{% if u %}
-		<ul>
-			<li>
-				<a href="http://127.0.0.1:8003/personal/article/add/">add article
-			</li>
-			<li>
-				<a href="http://127.0.0.1:8003/personal/"></a>
-			</li>
-		</ul>
-		{% endif %}
-	</div>
-	<div>
-		{% if u %}
+	<div id="content">
+		<div id="settings">
 			<form method="post" enctype="multipart/form-data">
-				<img src="{{STATIC_URL}}{{u.photo}}"><br/>
-				<input name="photo" type="file">
-				<input type="submit"><br/>
-				<label>realName: {{u.realname}}</label><br/>
-				<label>nickName: {{u.nickname}}</label><br/>
-				<label>mail: </label><input name="mail" type="text" placeholder="{{u.mail}}"><br/>
-				<label>website: </label><input name="website" type="text" placeholder="{{u.website}}"><br/>
-				<label>birth: </label><input name="birth" type="text" placeholder="{{u.birth}}"><br/>
-				<label>sex: </label><input name="sex" type="text" placeholder="{{u.sex}}"><br/>
-				<label>phone: </label><input name="phone" type="text" placeholder="{{u.phone}}"><br/>
-			</form>
+				<table>
+					<tr>
+						<td>photo</td>
+						<td>
+							<img src="{{STATIC_URL}}{{u.photo}}"><br/>
+							<input name="photo" type="file"><br/>
+						</td>
 
-		{% endif %}
+					</tr>
+					<tr>
+						<td><label>realName</label></td>
+						<td>{{u.realname}}</td>
+						
+					</tr>
+					<tr>
+						<td><label>nickName</label></td>
+						<td>{{u.nickname}}</td>
+					</tr>
+					<tr>
+						<td><label>mail</label></td>
+						<td><input name="mail" type="text" placeholder="{{u.mail}}"></td>
+					</tr>
+					<tr>
+						<td><label>website</label></td>
+						<td><input name="website" type="text" placeholder="{{u.website}}"></td>
+					</tr>
+					<tr>
+						<td>
+							<label>birth</label>
+						</td>
+						<td><input name="birth" type="text" placeholder="{{u.birth}}"></td>
+					</tr>
+					<tr>
+						<td><label>sex</label></td>
+						<td><input name="sex" type="text" placeholder="{{u.sex}}"></td>
+					</tr>
+					<tr>
+						<td><label>phone</label></td>
+						<td><input name="phone" type="text" placeholder="{{u.phone}}"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="保存"></td>
+
+					</tr>
+				</table>
+				
+			</form>
+		</div>
+		<div id="sidebar">
+			<div class="inner">
+				<div id="nickname">
+					<strong>{{u.nickname}}</strong>
+				</div>
+				<div>
+					<ul>
+						<li class="active">
+							<a href="/personal/">个人资料</a></li>
+						<li><a href="article/add/">文章</a></li>
+						<li><a href="articles/">文章列表</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
 
-</a>
 </body>
-<script type="text/javascript" src="{{STATIC_URL}}js/personal.js">
-</script>
 </html>

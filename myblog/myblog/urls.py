@@ -8,14 +8,14 @@ urlpatterns = patterns('',
     (r'^time/$', current_datetime),
     (r'^account/logout/$', logout),
     (r'^account/login/$', login),
-    (r'^(\d+)/$', article_search),
-    (r'^personal/$', personal),
     (r'^personal/article/edit/(\d+)/$', article_edit),
     (r'^personal/article/del/(\d+)/$', article_del),
     (r'^personal/article/add/$', article_add),
     (r'^personal/articles/$', articles_show),
+    (r'^personal/$', personal),
     # (r'^account/regist/$', regist),
-	(r'^$', index),
+    (r'^(\d+)/$', article_search),
+	(r'^$', index),    
 	
 )
 

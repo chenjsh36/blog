@@ -1,4 +1,3 @@
-# initdb.py
 from myblogapp.models import user, blog, article, comment, tag
 
 import datetime

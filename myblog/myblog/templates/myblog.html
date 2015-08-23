@@ -2,62 +2,136 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>{{ublog.name}}</title>
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/myblog.css">
 </head>
 <body>
 	<header>
-		<h1>{{cjsblog.name}}</h1>
-		<h2>{{cjsblog.words}}</h2>
+		<a href="/"><b>{{ublog.name}}</b></a>
+		<span>{{ublog.words}}</span>
+		<div class="float-right">
+			<a href="/account/login/">[登录]</a>
+			<span>/</span>
+			<a href="/account/regist/">[注册]</a>
+		</div>
 	</header>
+	<nav>
+		<div>
+			<ul>
+				<li>
+					<a href="/">首页</a>
+				</li>
+				<!-- 				
+				{% for tag in tags %}
+				<li>
+					<a href="/tag/{{tag.name}}/">tag.name</a>
+				</li>
+				{% endfor %} 
+				-->
+				<li>
+					<a href="https://github.com/chenjsh36">PHP</a>
+				</li>
+				<li>
+					<a href="https://github.com/chenjsh36">Web</a>
+				</li>
+				<li>
+					<a href="https://github.com/chenjsh36">Linux</a>
+				</li>
+				<li>
+					<a href="https://github.com/chenjsh36">GitHub</a>
+				</li>
+				<li>
+					<a href="http://hellocjs.sinaapp.com/">SAE</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 	<div id="content">
-		{% for item in cjsarticle %}
+		<div id="articles">
+						
+			{% for item in uarticle %}
 			<article>
-				<h3>{{item.title}}</h3>
-				<span>{{item.createtime}}</span>
-				<span>{{item.writer.nickname}}</span>
-				<p class="article_content">{{item.content}}</p>
+				<div class="art-title">
+					<div class="time-tag"><span>{{item.createtime|date:"Y F j"}}</span></div>
+					<div class="title-tag">
+						<h3>{{item.title}}</h3>
+						<span><a href="#">{{item.writer.nickname}}</a></span>
+					</div>
+				</div>
+
+				<div class="art-content">
+					<a href="/{{item.id}}/"> <p class="article_content">{{item.content|slice:"200"}}</p></a>						
+				</div>
+				<div class="art-footer">
+					<i class="icon-pencil"></i>
+					<a href="#">web</a>
+					<a href="#">html</a>
+					<a href="#">javacript</a>
+				</div>
 			</article>
-		{% endfor %}
-		<div id="personal">
-			<h2>姓名：{{cjs.nickname}}</h2>
-			<h3>生日：{{cjs.birthday}}</h3>
-			<h3>邮箱地址：{{cjs.mail}}</h3>
+			{% endfor %}
+		</div>
+		<div id="sidebar">
+			<div id="person-message">
+				<div class="pic-container">
+					<img src="{{STATIC_URL}}{{u.photo}}">
+				</div>
+				<div class="message">
+					<label><strong>姓名：</strong>{{u.nickname}}</label>
+					<label><strong>生日：</strong>{{u.birthday}}</label>
+					<label><strong>邮箱地址：</strong>{{u.mail}}</label>
+				</div>				
+			</div>
+			<div id="tag-message">
+				<label>标签</label>
+				<div class="tap-content">
+					<a href="#" class="back-red">web(13)</a>
+					<a href="#" class="back-blue">html(12)</a>
+					<a href="#" class="back-green">js(123)</a>
+					<a href="#" class="back-yellow">css(12)</a>
+					<a href="#" class="back-orange">less(3)</a>
+				</div>
+			</div>
+			<div id="website-message">
+				<label>站点信息</label>
+				<div class="tap-content">
+					<ul>
+						<li>
+							文章总数：{{uarticle|length}}篇
+						</li>
+						<li>
+							标签总数：{{tags|length}}个
+						</li>
+						<li>
+							网站已运行：{{blogage}}天
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 	<footer>
-		<label>
-			contact with me: {cjs.phone}
-		</label>
-
+		<div>
+			<dl>
+				<dt>前端网站</dt>
+				<dd><a href="#">w3cfun</a></dd>
+				<dd><a href="http://codepen.io/">开源代码</a></dd>
+				<dd><a href="http://www.ituring.com.cn/article/114385">图灵社区</a></dd>
+				<dd><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript">MDN</a></dd>
+				<dd><a href="https://github.com/ecomfe/spec">编码规范</a></dd>
+			</dl>
+			<dl>
+				<dt>工具类</dt>
+				<dd><a href="http://coffee-script.org/">coffeescript</a></dd>
+				<dd><a href="http://jade-lang.com/">jade</a></dd>
+				<dd><a href="http://datatables.net/">datatables</a></dd>
+			</dl>
+			<dl>
+				<dt>前端博客</dt>
+				<dd><a href="http://www.aliued.cn/">用户体验</a></dd>
+				<dd><a href="http://ued.sina.com/">sinaUED</a></dd>
+			</dl>
+		</div>
 	</footer>
-
-
-</body>
-<script type="text/javascript">
-	window.onload = function() {
-		function translateToHtml(_text) {
-			var newstr = "";
-			newstr = _text.replace(/\[b\]/g, "<strong>");
-			// alert(newstr);
-			newstr= newstr.replace(/\[\/b\]/g, "</strong>");
-			newstr=newstr.replace(/\[\/url\]/g, "</a>");
-			newstr=newstr.replace(/\[url=([a-zA-Z]+:\/\/[^\s]+)\]/g, "<a href=$1>");
-
-			console.log("new one : "+newstr);
-			return newstr;
-		}
-
-
-		var contents = document.getElementsByClassName("article_content");
-		console.log(contents.length);
-		for (var i = 0, len = contents.length; i < len; i++) {
-			console.log(contents[i].innerText);
-			var _text = contents[i].innerText;
-			var new_text = translateToHtml(_text);
-			console.log("text:"+ new_text + "\n end text");
-			contents[i].innerHTML = new_text;
-		}
-		console.log("end!");
-	}
-</script>
+<script type="text/javascript" charset="utf-8" src="http://169.254.35.179:8132/livereload.js"></script></body>
 </html>

@@ -1,0 +1,123 @@
+body,
+div,
+address,
+blockquote,
+iframe,
+ul,
+ol,
+dl,
+dt,
+dd,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+table,
+caption,
+th,
+td,
+form,
+legend,
+fieldset,
+input,
+button,
+select,
+textarea {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-family: inherit;
+}
+body {
+  font-size: 16px;
+  font-family: Verdana,Microsoft YaHei;
+  background-color: #F6F6F6;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+html,
+body,
+#content,
+#sidebar,
+#settings {
+  height: 100%;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+.align-top {
+  vertical-align: top !important;
+}
+.hide {
+  display: none;
+}
+#content #sidebar {
+  position: fixed;
+  width: 22%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 10% 0 0 4%;
+  background-color: #474546;
+}
+#content #sidebar li.active {
+  background-color: #F6F6F6;
+}
+#content #sidebar li.active a {
+  color: #666;
+}
+#content #sidebar a {
+  line-height: 2.5;
+  height: auto;
+  color: #ccc;
+  font-weight: bold;
+  display: block;
+  padding-left: 1rem;
+}
+#content #sidebar a:hover {
+  color: white;
+}
+#content #settings {
+  width: 78%;
+  height: 100%;
+  padding: 1rem;
+  float: right;
+  margin-left: 21%;
+  position: relative;
+  background-color: #F6F6F6;
+  z-index: 3;
+  box-sizing: border-box;
+}
+#content #settings form table td {
+  padding: .5rem 1rem;
+  color: #333;
+}
+#content #settings form table td:first-of-type {
+  vertical-align: top;
+  text-align: right;
+  color: #666;
+}
+#content #settings form table td input[type=text] {
+  height: 2rem;
+  line-height: 2rem;
+  font-size: 1.5rem;
+}
+#content #settings form table td input[type=button] {
+  color: #888;
+  width: 4rem;
+  height: 2rem;
+  border: 1px solid #888;
+  box-shadow: 1px 2px 2px #555;
+}
+#content #settings form img {
+  width: 100px;
+}

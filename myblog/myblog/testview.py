@@ -8,7 +8,6 @@ from django.template import Context
 from django.template import RequestContext
 from settings import *
 from myblogapp.models import *
-# from hellocjsAPP.models import Programmer
 
 import datetime
 def article_edit(request, offset) :
@@ -16,44 +15,37 @@ def article_edit(request, offset) :
 		offset = int(offset)
 	except ValueError:
 		raise Http404()
-	art = article.objects.get(id=offset)
-	if request.method == 'POST':
-		if request.session.test_cookie_worked():
-			request.session.delete_test_cookie()
-			# edit article here
-			if "user_id" in request.session:
-				user_id = request.session["user_id"]
-				u = user.objects.get(id=user_id)
-
-				
+	if "user_id" in request.session:
+		user_id = request.session["user_id"]
+		u = user.objects.get(id=user_id)
+		art = article.objects.get(id=offset)
+		if request.method == 'POST':
+			if request.session.test_cookie_worked():
+				request.session.delete_test_cookie()
+				# edit article here
+								
 				art_id = request.POST.get("art_id", '')
 				title = request.POST.get("title", '')
 				content = request.POST.get("content", '')
 				modiftime = datetime.datetime.now()
 				state = request.POST.get("state", '')
 
-				art = article.objects.get(id=art_id)
+				art = article.objects.get(id=art_id if art_id != '' else None)
 				# check if writer's article
 				if art and u and art.writer == u:
 					# has the access to edit article
-					if title != '' and content != '':
-						# can modefied
-						art.title = title
-						art.content = content
-						art.state = state
-						art.modiftime = modiftime
-						art.save()
-						return HttpResponseRedirect("/" + art.id)
+					# can modefied
+					art.title = title if title != '' else article.title
+					art.content = content if content != '' else article.content
+					art.state = state
+					art.modiftime = modiftime
+					art.save()
+					return HttpResponseRedirect("/" + str(art.id) + "/")
 				else:
 					return render_to_response("warning.html", {warnings:"You have no access to delete this article"},context_instance=RequestContext(request))
-
-			# not done here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-	request.session.set_test_cookie()
-	# art: article
-	return render_to_response("article_edit.html",locals(),context_instance=RequestContext(request))
-
+		request.session.set_test_cookie()
+		# art: article
+		return render_to_response("article_edit.html",locals(),context_instance=RequestContext(request))
 
 def articles_show(request) :
 	canedit = False
@@ -101,14 +93,16 @@ def article_del(request, offset):
 	return render_to_response("warning.html", {warnings:"You have no access to delete this article"},context_instance=RequestContext(request))
 
 def article_add(request):
-	if request.method == 'POST':
-		if request.session.test_cookie_worked():
-			request.session.delete_test_cookie()
-			# add article here 
-			# try:
-			if "user_id" in request.session:
-				user_id = request.session["user_id"]
-				u = user.objects.get(id = user_id)
+	if "user_id" in request.session:
+		user_id = request.session["user_id"]
+		u = user.objects.get(id = user_id)
+		if request.method == 'POST':
+			if request.session.test_cookie_worked():
+				request.session.delete_test_cookie()
+				# add article here 
+				# try:
+
+
 				if u.state == "manager":
 					# has the access to add article
 					ublog = blog.objects.get(useby=u)
@@ -122,14 +116,15 @@ def article_add(request):
 					return HttpResponseRedirect('/'+str(new_article.id) + '/')
 				else:
 					return HttpResponse("You have no access to add article")
-			return HttpResponse("Please login first")
-			# except:
-				# return HttpResponse("Getting user_id in session has some problem may be")
-		else:
-			return HttpResponse("Please enable cookies and try again")
 
-	request.session.set_test_cookie()
-	return render_to_response("article_add.html")
+				# except:
+					# return HttpResponse("Getting user_id in session has some problem may be")
+			else:
+				return HttpResponse("Please enable cookies and try again")
+
+		request.session.set_test_cookie()
+		return render_to_response("article_add.html",locals(), context_instance = RequestContext(request))
+	return HttpResponse("Please login first")
 
 def personal(request):
 	if "user_id" in request.session:
@@ -205,10 +200,12 @@ def index(request):
 	_username = "陈坚生"
 	_username = _username.decode("utf-8")
 
-	cjs = user.objects.get(realname=_username)
-	cjsblog = blog.objects.get(useby=cjs)
-	cjsarticle = article.objects.filter(blogname=cjsblog, state="exist")
-	print cjs.nickname
+	u = user.objects.get(realname=_username)
+	ublog = blog.objects.get(useby=u)
+	uarticle = article.objects.filter(blogname=ublog, state="exist")
+	tags = tag.objects.all()
+	blogage = (datetime.date.today() - ublog.birth).days 
+	print blogage
 	return render_to_response("myblog.html",locals(),context_instance=RequestContext(request))
 
 def hello(request):
