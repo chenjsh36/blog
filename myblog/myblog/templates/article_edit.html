@@ -40,13 +40,20 @@
 							<label>tags</label>
 						</td>
 						<td>
-							<input name="tags" type="checkbox"><label>web</label>
-							<input name="tags" type="checkbox"><label>html</label>				
-							<input name="tags" type="checkbox"><label>javascript</label>
+							{% if tags %}
+								{% for tag in tags %}
+								<input name="tags" type="checkbox" value="{{tag.id}}"><label>{{tag.name}}</label>
+								{% endfor %}
+							{% else %}
+							<p> tags not exist</p>
+							{% endif %}
 						</td>
 					</tr>
 					<tr>						
-						<td><input type="submit" value="发布" class="hide"><br/></td>
+						<td>
+							<input type="text" value="{{art.id}}" class="hide" name="art_id"><br/>
+							<input type="submit" value="发布" class="hide"></td>
+						
 						<td><input type="button" value="check"></td>
 
 
@@ -58,7 +65,7 @@
 		<div id="sidebar">
 			<div class="inner">
 				<div id="nickname">
-					<strong>{{u.nickname}}</strong>
+					<strong><a href="/">{{u.nickname}}</a></strong>
 				</div>
 				<div>
 					<ul>

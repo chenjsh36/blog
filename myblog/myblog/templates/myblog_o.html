@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<header>
+		<h1>{{ublog.name}}</h1>
+		<h2>{{ublog.words}}</h2>
+	</header>
+	<div id="content">
+		{% for item in uarticle %}
+			<article>
+				<h3>{{item.title}}</h3>
+				<span>{{item.createtime}}</span>
+				<span>{{item.writer.nickname}}</span>
+				<p class="article_content">{{item.content}}</p>
+			</article>
+		{% endfor %}
+		<div id="personal">
+			<h2>姓名：{{u.nickname}}</h2>
+			<h3>生日：{{u.birthday}}</h3>
+			<h3>邮箱地址：{{u.mail}}</h3>
+		</div>
+	</div>
+	<footer>
+		<label>
+			contact with me: {{u.phone}}
+		</label>
+
+	</footer>
+
+
+</body>
+<script type="text/javascript">
+	window.onload = function() {
+		function translateToHtml(_text) {
+			var newstr = "";
+			newstr = _text.replace(/\[b\]/g, "<strong>");
+			// alert(newstr);
+			newstr= newstr.replace(/\[\/b\]/g, "</strong>");
+			newstr=newstr.replace(/\[\/url\]/g, "</a>");
+			newstr=newstr.replace(/\[url=([a-zA-Z]+:\/\/[^\s]+)\]/g, "<a href=$1>");
+
+			console.log("new one : "+newstr);
+			return newstr;
+		}
+
+
+		var contents = document.getElementsByClassName("article_content");
+		console.log(contents.length);
+		for (var i = 0, len = contents.length; i < len; i++) {
+			console.log(contents[i].innerText);
+			var _text = contents[i].innerText;
+			var new_text = translateToHtml(_text);
+			console.log("text:"+ new_text + "\n end text");
+			contents[i].innerHTML = new_text;
+		}
+		console.log("end!");
+	}
+</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Personal</title>
+</head>
+<body>
+	<h1>个人页面</h1>
+
+	<div>
+		<h2>operation</h2>
+		{% if u %}
+		<ul>
+			<li>
+				<a href="article/add/">add article</a>
+			</li>
+			<li>
+				<a href="/"></a>
+			</li>
+			<li>
+				<a href="articles/">articles</a>
+			</li>
+		</ul>
+		{% endif %}
+	</div>
+	<div>
+		{% if u %}
+			<form method="post" enctype="multipart/form-data">
+				<img src="{{STATIC_URL}}{{u.photo}}"><br/>
+				<input name="photo" type="file">
+				<input type="submit"><br/>
+				<label>realName: {{u.realname}}</label><br/>
+				<label>nickName: {{u.nickname}}</label><br/>
+				<label>mail: </label><input name="mail" type="text" placeholder="{{u.mail}}"><br/>
+				<label>website: </label><input name="website" type="text" placeholder="{{u.website}}"><br/>
+				<label>birth: </label><input name="birth" type="text" placeholder="{{u.birth}}"><br/>
+				<label>sex: </label><input name="sex" type="text" placeholder="{{u.sex}}"><br/>
+				<label>phone: </label><input name="phone" type="text" placeholder="{{u.phone}}"><br/>
+			</form>
+
+		{% endif %}
+	</div>
+
+</a>
+</body>
+<script type="text/javascript" src="{{STATIC_URL}}js/personal.js">
+</script>
+</html>

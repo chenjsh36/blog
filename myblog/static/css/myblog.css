@@ -44,6 +44,9 @@ a {
 ul {
   list-style: none;
 }
+.hide {
+  display: none;
+}
 header {
   width: 95%;
   margin: 1rem auto;
@@ -151,6 +154,7 @@ article .title-tag a {
 article .art-content {
   margin-top: .5rem;
   height:5rem;
+  overflow: hidden;
 }
 article .art-content a {
   color: black;
@@ -190,7 +194,7 @@ article .art-footer a {
 }
 #tag-message label,
 #website-message label {
-  padding: .3rem 2rem 0;
+  padding: .3rem 2rem 1px;
   background-color: #474546;
   color: white;
 }
@@ -313,3 +317,4 @@ footer dl dd a {
     width: 100%;
   }
 }
+

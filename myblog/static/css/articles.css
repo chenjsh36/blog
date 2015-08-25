@@ -117,3 +117,11 @@ body,
 #content #settings img {
   width: 100px;
 }
+
+#nickname {
+  font-size: 2rem;
+  margin: 0 0 2rem 0;
+}
+#nickname a {
+  padding-left: 0 !important;
+}

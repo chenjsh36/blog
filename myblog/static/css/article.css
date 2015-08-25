@@ -44,6 +44,9 @@ a {
 ul {
   list-style: none;
 }
+.hide {
+  display: none;
+}
 header {
   width: 95%;
   margin: 1rem auto;
@@ -180,6 +183,12 @@ article .art-footer a {
   padding-right: 1rem;
   padding-bottom: .5rem;
 }
+#sidebar .tag-back {
+  background-color: #c15151;
+}
+#sidebar .tag-back:nth-child(2n) {
+  background-color: #5a4ed4;
+}
 #person-message {
   border: 1px solid #999;
 }
@@ -190,7 +199,7 @@ article .art-footer a {
 }
 #tag-message label,
 #website-message label {
-  padding: .3rem 2rem 0;
+  padding: .3rem 2rem 1px;
   background-color: #474546;
   color: white;
 }
@@ -202,7 +211,7 @@ article .art-footer a {
 #tag-message .tap-content a,
 #website-message .tap-content a {
   white-space: nowrap;
-  background-color: orange;
+  background-color: #c15151;
   color: white;
   padding: .1rem;
 }
@@ -312,4 +321,48 @@ footer dl dd a {
   #article-container {
     width: 100%;
   }
+}
+
+.article-comment {
+  float:left;
+  margin-top: 2rem;
+  width: 100%;
+}
+.article-comment h3{
+  color: #444;
+  font-weight: bold;
+  border-bottom: 1px solid #CDCDCD;
+  padding: 0 0 5px;
+}
+.comment {
+  margin-top: 1rem; 
+}
+.comment-top strong {
+  font-size: 1.2rem;
+  color: #333;
+}
+.comment-top span {
+  color: #888;
+  font-size: .8rem;
+  margin-left: 1rem;
+}
+.comment-content p{
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  color: #222;
+  border-bottom: 1px dotted #cdcdcd ;
+}
+.article-comment form .hide{
+  display: none;
+}
+.article-comment form {
+  margin-top:2rem;
+}
+.article-comment textarea {
+  width: 100%;
+  font-size: 1rem;
+}
+.article-comment input[type=submit] {
+  width: 3rem;
+  height: 2rem;
 }

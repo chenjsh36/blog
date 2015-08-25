@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{{ublog.name}}</title>
+
 	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/myblog.css">
 </head>
 <body>
@@ -10,9 +11,15 @@
 		<a href="/"><b>{{ublog.name}}</b></a>
 		<span>{{ublog.words}}</span>
 		<div class="float-right">
-			<a href="/account/login/">[登录]</a>
+			{% if islogin == "false" %}
+			<a href="/account/login/">[登录]</a>			
 			<span>/</span>
 			<a href="/account/regist/">[注册]</a>
+			{% else %}
+			<a href="/personal/">[我的博客]</a>
+			<span>/</span>
+			<a href="/account/logout/">[登出]</a>
+			{% endif %}
 		</div>
 	</header>
 	<nav>
@@ -28,21 +35,6 @@
 				</li>
 				{% endfor %} 
 				-->
-				<li>
-					<a href="https://github.com/chenjsh36">PHP</a>
-				</li>
-				<li>
-					<a href="https://github.com/chenjsh36">Web</a>
-				</li>
-				<li>
-					<a href="https://github.com/chenjsh36">Linux</a>
-				</li>
-				<li>
-					<a href="https://github.com/chenjsh36">GitHub</a>
-				</li>
-				<li>
-					<a href="http://hellocjs.sinaapp.com/">SAE</a>
-				</li>
 			</ul>
 		</div>
 	</nav>
@@ -60,13 +52,11 @@
 				</div>
 
 				<div class="art-content">
-					<a href="/{{item.id}}/"> <p class="article_content">{{item.content|slice:"200"}}</p></a>						
+					<a href="/{{item.id}}/"> <p class="article_content hide">{{item.content|slice:"200"}}</p></a>						
 				</div>
 				<div class="art-footer">
 					<i class="icon-pencil"></i>
-					<a href="#">web</a>
-					<a href="#">html</a>
-					<a href="#">javacript</a>
+					<a href="#">{{item.tagstr}}</a>
 				</div>
 			</article>
 			{% endfor %}
@@ -74,22 +64,26 @@
 		<div id="sidebar">
 			<div id="person-message">
 				<div class="pic-container">
+					{% if u.photo|slice:"4" == "http" %}
+					<img src="{{u.photo}}">
+					{% else %}
 					<img src="{{STATIC_URL}}{{u.photo}}">
+					{% endif %}
 				</div>
 				<div class="message">
 					<label><strong>姓名：</strong>{{u.nickname}}</label>
-					<label><strong>生日：</strong>{{u.birthday}}</label>
+					<label><strong>生日：</strong>{{u.birth}}</label>
 					<label><strong>邮箱地址：</strong>{{u.mail}}</label>
 				</div>				
 			</div>
 			<div id="tag-message">
 				<label>标签</label>
 				<div class="tap-content">
-					<a href="#" class="back-red">web(13)</a>
-					<a href="#" class="back-blue">html(12)</a>
-					<a href="#" class="back-green">js(123)</a>
-					<a href="#" class="back-yellow">css(12)</a>
-					<a href="#" class="back-orange">less(3)</a>
+					{% if tags %}
+						{% for tag in tags %}
+							<a href="/tag/{{tag.id}}/" class="tag-back">{{tag.name}}</a>
+						{% endfor %}
+					{% endif %}
 				</div>
 			</div>
 			<div id="website-message">
@@ -133,5 +127,8 @@
 			</dl>
 		</div>
 	</footer>
-<script type="text/javascript" charset="utf-8" src="http://169.254.35.179:8132/livereload.js"></script></body>
+</body>
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/textToHtml.js"></script>
+
 </html>

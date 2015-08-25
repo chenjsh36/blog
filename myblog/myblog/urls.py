@@ -14,6 +14,8 @@ urlpatterns = patterns('',
     (r'^personal/articles/$', articles_show),
     (r'^personal/$', personal),
     # (r'^account/regist/$', regist),
+    (r'^tag/(\d+)/$', tag_search),
+    (r'^(\d+)/addComment/$', addComment),
     (r'^(\d+)/$', article_search),
 	(r'^$', index),    
 	

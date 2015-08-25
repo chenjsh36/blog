@@ -38,6 +38,8 @@ class article(models.Model):
 	modiftime = models.DateField()
 	title = models.CharField(max_length=50)
 	content = models.CharField(max_length=10000)
+	tagstr = models.CharField(max_length=100)
+	
 	def __unicode__(self):
 		return self.title
 

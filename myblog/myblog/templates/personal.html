@@ -15,7 +15,13 @@
 					<tr>
 						<td>photo</td>
 						<td>
-							<img src="{{STATIC_URL}}{{u.photo}}"><br/>
+							{% if u.photo %}
+								{% if u.photo|slice:"4" == "http" %}
+								<img src="{{u.photo}}"><br/>
+								{% else %}
+								<img src="{{STATIC_URL}}{{u.photo}}"><br/>
+								{% endif %}
+							{% endif %}
 							<input name="photo" type="file"><br/>
 						</td>
 
@@ -45,7 +51,20 @@
 					</tr>
 					<tr>
 						<td><label>sex</label></td>
-						<td><input name="sex" type="text" placeholder="{{u.sex}}"></td>
+						<td>
+							{% if u.sex == 0 %}
+							<input name="sex" type="radio" checked="true" value="0">
+							<label>男</label>
+							<input name="sex" type="radio" value="1">
+							<label>女</label>
+							{% endif %}
+							{% if u.sex == 1 %}
+							<input name="sex" type="radio" value="0">
+							<label>男</label>
+							<input name="sex" type="radio" checked="true" value="1">
+							<label>女</label>
+							{% endif %}
+						</td>
 					</tr>
 					<tr>
 						<td><label>phone</label></td>
@@ -63,7 +82,7 @@
 		<div id="sidebar">
 			<div class="inner">
 				<div id="nickname">
-					<strong>{{u.nickname}}</strong>
+					<strong><a href="/">{{u.nickname}}</a></strong>
 				</div>
 				<div>
 					<ul>

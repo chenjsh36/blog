@@ -39,9 +39,17 @@
 							<label>tags</label>
 						</td>
 						<td>
+							{% if tags %}
+								{% for tag in tags %}
+								<input name="tags" type="checkbox" value="{{tag.id}}"><label>{{tag.name}}</label>
+								{% endfor %}
+							{% else %}
+							<p> tags not exist</p>
+							{% endif %}
+							<!-- 							
 							<input name="tags" type="checkbox"><label>web</label>
 							<input name="tags" type="checkbox"><label>html</label>				
-							<input name="tags" type="checkbox"><label>javascript</label>
+							<input name="tags" type="checkbox"><label>javascript</label> -->
 						</td>
 					</tr>
 					<tr>						
@@ -55,6 +63,9 @@
 		</div>
 		<div id="sidebar">
 			<div class="inner">
+				<div id="nickname">
+					<strong><a href="/">{{u.nickname}}</a></strong>
+				</div>
 				<div>
 					<ul>
 						<li>
